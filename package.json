@@ -1,0 +1,38 @@
+{
+  "name": "midtrans-ts-wrapper",
+  "version": "1.0.0",
+  "description": "Unofficial TypeScript wrapper for Midtrans Core API and Snap API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"No test yet\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justpiple/midtrans-ts-wrapper.git"
+  },
+  "keywords": [
+    "midtrans",
+    "payment",
+    "gateway",
+    "typescript"
+  ],
+  "author": "Kusindra AJi Rabbany <work@benspace.xyz>",
+  "license": "MIT",
+  "homepage": "https://github.com/justpiple/midtrans-ts-wrapper#readme",
+  "devDependencies": {
+    "@types/lodash": "^4.17.16"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "lodash": "^4.17.21"
+  },
+  "bugs": {
+    "url": "https://github.com/justpiple/midtrans-ts-wrapper/issues"
+  }
+}
