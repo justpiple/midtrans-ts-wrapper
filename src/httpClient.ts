@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import axios, { AxiosInstance, AxiosError } from "axios";
-import MidtransError from "./midtransError";
+import { MidtransError } from "./midtransError";
 
 /**
  * Wrapper of Axios to perform API requests to Midtrans API.
  * @return {Promise} of API response, or exception during the request.
  * Capable of performing HTTP `request`.
  */
-class HttpClient {
+export class HttpClient {
   parent: Record<string, any>;
   http_client: AxiosInstance;
 
@@ -131,5 +131,3 @@ class HttpClient {
     });
   }
 }
-
-export default HttpClient;

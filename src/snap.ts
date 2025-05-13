@@ -1,6 +1,6 @@
-import ApiConfig from "./apiConfig";
-import HttpClient from "./httpClient";
-import Transaction from "./transaction";
+import { ApiConfig } from "./apiConfig";
+import { HttpClient } from "./httpClient";
+import { Transaction } from "./transaction";
 import { RequestBody, CreateTransactionSuccessResponse } from "./types";
 
 interface SnapOptions {
@@ -12,7 +12,7 @@ interface SnapOptions {
 /**
  * Snap object used to perform requests to Midtrans Snap API
  */
-class Snap {
+export class Snap {
   apiConfig: ApiConfig;
   httpClient: HttpClient;
   transaction: Transaction;
@@ -64,5 +64,3 @@ class Snap {
     return this.createTransaction(parameter).then((res) => res.redirect_url);
   }
 }
-
-export default Snap;

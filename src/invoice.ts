@@ -1,5 +1,5 @@
-import ApiConfig from "./apiConfig";
-import HttpClient from "./httpClient";
+import { ApiConfig } from "./apiConfig";
+import { HttpClient } from "./httpClient";
 import { InvoiceRequestBody, CreateInvoiceSuccessResponse } from "./types";
 
 interface InvoiceOptions {
@@ -11,7 +11,7 @@ interface InvoiceOptions {
 /**
  * Invoice class for interacting with Midtrans Invoice API
  */
-class Invoice {
+export class Invoice {
   apiConfig: ApiConfig;
   httpClient: HttpClient;
 
@@ -61,5 +61,3 @@ class Invoice {
     return this.createInvoice(parameter).then((res) => res.pdf_url);
   }
 }
-
-export default Invoice;

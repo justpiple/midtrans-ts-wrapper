@@ -2,7 +2,7 @@
  * Custom HTTP Error Class that also exposes httpStatusCode, ApiResponse, rawHttpClientData.
  * To provide more detailed information for library users.
  */
-class MidtransError extends Error {
+export class MidtransError extends Error {
   httpStatusCode: number | null;
   ApiResponse: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   rawHttpClientData: any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -29,5 +29,3 @@ class MidtransError extends Error {
     }
   }
 }
-
-export default MidtransError;

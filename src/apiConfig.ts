@@ -9,7 +9,7 @@ interface ApiConfigOptions {
 /**
  * Config Object that stores isProduction, serverKey, clientKey, and API base URLs.
  */
-class ApiConfig {
+export class ApiConfig {
   isProduction: boolean;
   serverKey: string;
   clientKey: string;
@@ -114,5 +114,3 @@ class ApiConfig {
       : ApiConfig.IRIS_SANDBOX_BASE_URL;
   }
 }
-
-export default ApiConfig;

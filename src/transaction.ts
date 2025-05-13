@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { CancelTransactionResponse, TransactionStatusResponse } from "./types";
-import ApiConfig from "./apiConfig";
-import HttpClient from "./httpClient";
+import { ApiConfig } from "./apiConfig";
+import { HttpClient } from "./httpClient";
 
-class Transaction {
+export class Transaction {
   parent: { apiConfig: ApiConfig; httpClient: HttpClient };
 
   constructor(parentObj: { apiConfig: ApiConfig; httpClient: HttpClient }) {
@@ -116,6 +116,4 @@ class Transaction {
   }
 }
 
-class MidtransNotificationError extends Error {}
-
-export default Transaction;
+export class MidtransNotificationError extends Error {}
