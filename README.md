@@ -2,6 +2,8 @@
 
 A TypeScript wrapper for Midtrans Payment Gateway API. This library provides type-safe methods to interact with Midtrans payment services.
 
+[![npm version](https://img.shields.io/npm/v/midtrans-ts-wrapper)](https://www.npmjs.com/package/midtrans-ts-wrapper)
+
 ## Installation
 
 ```bash
