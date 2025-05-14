@@ -1,13 +1,15 @@
 import { createHash } from "crypto";
 import { MidtransError } from "./midtransError";
-import { ApiConfig } from "./apiConfig";
 import { MidtransWebhookBody } from "./types";
 
 export class WebhookHandler {
-  private config: ApiConfig;
+  private readonly serverKey: string;
 
-  constructor(config: ApiConfig) {
-    this.config = config;
+  constructor(serverKey: string) {
+    if (!serverKey) {
+      throw new MidtransError("Server key is required", 400);
+    }
+    this.serverKey = serverKey;
   }
 
   /**
@@ -20,9 +22,15 @@ export class WebhookHandler {
     try {
       const { order_id, status_code, gross_amount, signature_key } =
         notification;
-      const serverKey = this.config.serverKey;
 
-      const stringToHash = `${order_id}${status_code}${gross_amount}${serverKey}`;
+      if (!order_id || !status_code || !gross_amount || !signature_key) {
+        throw new MidtransError(
+          "Missing required fields for signature verification",
+          400,
+        );
+      }
+
+      const stringToHash = `${order_id}${status_code}${gross_amount}${this.serverKey}`;
 
       const calculatedSignature = createHash("sha512")
         .update(stringToHash)
