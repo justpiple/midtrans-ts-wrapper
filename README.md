@@ -1,6 +1,6 @@
 # Unofficial Midtrans TypeScript Wrapper
 
-A TypeScript wrapper for Midtrans Payment Gateway API. This library provides type-safe methods to interact with Midtrans payment services.
+A TypeScript wrapper for Midtrans Payment Gateway API. This library provides type-safe methods to interact with Midtrans payment services including Snap, Invoice, and Webhook handling.
 
 [![npm version](https://img.shields.io/npm/v/midtrans-ts-wrapper)](https://www.npmjs.com/package/midtrans-ts-wrapper)
 
@@ -13,16 +13,23 @@ npm install midtrans-ts-wrapper
 ## Quick Start
 
 ```typescript
-import { MidtransClient } from "midtrans-ts-wrapper";
+import { Snap, Invoice, WebhookHandler } from "midtrans-ts-wrapper";
 
-const midtrans = new MidtransClient({
-  clientKey: "YOUR_CLIENT_KEY",
-  serverKey: "YOUR_SERVER_KEY",
-  isProduction: false, // Set to true for production
-});
+// Configuration
+const isSandbox = clientKey.includes("SB-");
+const apiConfig = {
+  isProduction: !isSandbox,
+  serverKey: serverKey, // Your server key
+  clientKey: clientKey, // Your client key
+};
 
-// Create a transaction
-const transaction = await midtrans.createTransaction({
+// Initialize clients
+const snapClient = new Snap(apiConfig);
+const invoiceClient = new Invoice(apiConfig);
+const webhookHandler = new WebhookHandler(apiConfig.serverKey);
+
+// Create a transaction using Snap
+const transaction = await snapClient.createTransaction({
   transaction_details: {
     order_id: "ORDER-123",
     gross_amount: 100000,
@@ -33,23 +40,41 @@ const transaction = await midtrans.createTransaction({
     email: "john.doe@example.com",
   },
 });
+
+// Create an invoice
+const invoice = await invoiceClient.createInvoice({
+  transaction_details: {
+    order_id: "INV-123",
+    gross_amount: 100000,
+  },
+  customer_details: {
+    first_name: "John",
+    last_name: "Doe",
+    email: "john.doe@example.com",
+  },
+});
+
+// Verify webhook signature
+const isValid = webhookHandler.verifySignature(webhookNotification);
 ```
 
-## Available Methods
+## Available Modules
+
+### Snap
 
 - `createTransaction()` - Create a new transaction
-- `getTransactionStatus()` - Get transaction status
-- `cancelTransaction()` - Cancel a transaction
-- `expireTransaction()` - Expire a transaction
-- `refundTransaction()` - Refund a transaction
+- `createTransactionToken()` - Get transaction token
+- `createTransactionRedirectUrl()` - Get redirect URL
 
-## Type Definitions Status
+### Invoice
 
-This wrapper is currently in development and not all Midtrans API types are fully implemented. Some types might be incomplete or missing. If you find any missing or incorrect types, please contribute by:
+- `createInvoice()` - Create a new invoice
+- `createInvoicePaymentLink()` - Get payment link URL
+- `createInvoicePdfUrl()` - Get invoice PDF URL
 
-1. Opening an issue to report missing types
-2. Submitting a pull request with the type definitions
-3. Providing examples of the API responses you're working with
+### WebhookHandler
+
+- `verifySignature()` - Verify webhook notification signature
 
 ## Contributing
 
