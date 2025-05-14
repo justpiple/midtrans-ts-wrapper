@@ -26,7 +26,8 @@
   "license": "MIT",
   "homepage": "https://github.com/justpiple/midtrans-ts-wrapper#readme",
   "devDependencies": {
-    "@types/lodash": "^4.17.16"
+    "@types/lodash": "^4.17.16",
+    "@types/node": "^22.15.18"
   },
   "dependencies": {
     "axios": "^1.9.0",
